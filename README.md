@@ -247,7 +247,30 @@ const isPerson = isObjectOf({
 });
 ```
 
-Without `is()`, TypeScript would report reference errors for variables used before being defined, or circular type definitions would cause infinite recursion at runtime.
+Without `is()`, TypeScript would report reference errors for variables used before being defined.
+
+⚠️ **Caveat**: When using recursive inspectors with `is()`, be careful with deeply nested data structures. Recursive validation can hit JavaScript's call stack limits if the nesting is too deep.
+
+⚠️ **Important**: Even with `is()`, you can still encounter infinite recursion at runtime if the actual data values reference themselves circularly. While `is()` solves the problem of circular type definitions in your code, it cannot automatically detect circular references in the data being validated. For example:
+
+```typescript
+// This circular object references itself
+const ouroboros: any = { name: "circular" };
+ouroboros.self = ouroboros;
+
+// Even with is(), this can cause infinite recursion
+const isOuroboros = is(() => {
+    return isObjectOf({
+        name: isString,
+        self: isOuroboros, // Lazy evaluation prevents compile-time issues
+    });
+});
+
+// But this will still stack overflow at runtime
+isOuroboros(ouroboros); // ❌ Maximum call stack size exceeded
+```
+
+For validating data with circular references, consider implementing custom inspectors with reference tracking or depth limits.
 
 ### Type Inference with Inspected
 
@@ -358,7 +381,7 @@ type StringOrNumber = Inspected<typeof isStringOrNumber>; // string | number
 - `isObjectOf(shape)`: Checks if x has a certain object shape
 - `is(lazy)`: Lazy inspector for circular references
 
-### Common JS Type Inspectors
+### Builtins Type Inspectors
 
 - `isDate(x)`: Checks if x is a Date object
 - `isSet(x)`: Checks if x is a Set
