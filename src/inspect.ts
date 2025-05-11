@@ -419,7 +419,7 @@ export function isRecordOf<K extends keyof any, V>(isK: Inspector<K>, isV: Inspe
  */
 export function isAnyOf<T extends Inspector<any>[]>(...inspectors: T): Inspector<Union<T>> {
     return (x: any): x is Union<T> => {
-        return inspectors.some((isT) => isT(x));
+        return inspectors.some(isT => isT(x));
     };
 }
 
@@ -431,7 +431,7 @@ export function isAnyOf<T extends Inspector<any>[]>(...inspectors: T): Inspector
  */
 export function isAllOf<T extends Inspector<any>[]>(...inspectors: T): Inspector<UnionToIntersection<Union<T>>> {
     return (x: any): x is UnionToIntersection<Union<T>> => {
-        return inspectors.every((isT) => isT(x));
+        return inspectors.every(isT => isT(x));
     };
 }
 
@@ -585,7 +585,7 @@ export function isNonEmptyArrayOf<T>(isT: Inspector<T>): Inspector<[T, ...T[]]> 
  * );
  */
 export function isRefined<T>(isT: Inspector<T>, ...predicates: Predicate<T>[]): Inspector<T> {
-    return (x: any): x is T => isT(x) && predicates.every((cond) => cond(x));
+    return (x: any): x is T => isT(x) && predicates.every(cond => cond(x));
 }
 
 /**

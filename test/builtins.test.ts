@@ -93,7 +93,7 @@ describe("Built-in Type Inspectors", () => {
         it("should return true for Promise objects", () => {
             expect(isPromise(Promise.resolve())).toBe(true);
             expect(isPromise(Promise.reject().catch(() => {}))).toBe(true);
-            expect(isPromise(new Promise((resolve) => resolve(true)))).toBe(true);
+            expect(isPromise(new Promise(resolve => resolve(true)))).toBe(true);
             expect(isPromise(new Promise((resolve, _reject) => _reject(new Error())).catch(() => {}))).toBe(true);
         });
 
@@ -187,7 +187,7 @@ describe("Built-in Type Inspectors", () => {
         it("should return true for Promise and promise-like objects", () => {
             expect(isPromiseLike(Promise.resolve())).toBe(true);
             expect(isPromiseLike(Promise.reject().catch(() => {}))).toBe(true);
-            expect(isPromiseLike(new Promise((resolve) => resolve(true)))).toBe(true);
+            expect(isPromiseLike(new Promise(resolve => resolve(true)))).toBe(true);
 
             // Promise-like objects
             expect(isPromiseLike({ then: () => {} })).toBe(true);

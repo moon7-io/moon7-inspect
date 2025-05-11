@@ -180,25 +180,25 @@ describe("Extended Type Inspectors", () => {
 
     describe("isRefined", () => {
         // Is positive number
-        const isPositiveNumber = isRefined(isNumber, (n) => n > 0);
+        const isPositiveNumber = isRefined(isNumber, n => n > 0);
 
         // Is even number
-        const isEvenNumber = isRefined(isNumber, (n) => n % 2 === 0);
+        const isEvenNumber = isRefined(isNumber, n => n % 2 === 0);
 
         // Multiple predicates: positive and even
         const isPositiveEvenNumber = isRefined(
             isNumber,
-            (n) => n > 0,
-            (n) => n % 2 === 0
+            n => n > 0,
+            n => n % 2 === 0
         );
 
         // Adult (age >= 18) who can also vote (age >= 18 && citizen)
         type Person = { age: number; citizen: boolean };
-        const isAdult = isRefined(isObjectOf<Person>({ age: isNumber, citizen: isBoolean }), (p) => p.age >= 18);
+        const isAdult = isRefined(isObjectOf<Person>({ age: isNumber, citizen: isBoolean }), p => p.age >= 18);
         const isVoter = isRefined(
             isObjectOf<Person>({ age: isNumber, citizen: isBoolean }),
-            (p) => p.age >= 18,
-            (p) => p.citizen === true
+            p => p.age >= 18,
+            p => p.citizen === true
         );
 
         it("should return true for values matching base type and a single predicate", () => {
