@@ -2,7 +2,7 @@
     "name": "@moon7/inspect",
     "author": "Munir Hussin <profoundseven@gmail.com>",
     "license": "MIT",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Lightweight, type-safe runtime type checking library for TypeScript and JavaScript",
     "keywords": [
         "inspect",
