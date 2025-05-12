@@ -1,15 +1,15 @@
-# @moon7/inspect
+# 🌙 @moon7/inspect
 
 [![npm version](https://img.shields.io/npm/v/@moon7/inspect.svg)](https://www.npmjs.com/package/@moon7/inspect)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A lightweight, type-safe runtime type checking library for TypeScript and JavaScript.
 
-## Purpose
+## 🎯 Purpose
 
 While it might seem overly simple to use functions like `isString()` or `isNumber()` when you could directly write `typeof x === "string"`, the real power of this library lies in its composability and how it integrates with TypeScript's type system.
 
-### Why Not Just Use typeof?
+### 🤔 Why Not Just Use typeof?
 
 1. **Composability**: The inspector functions can be combined to create complex type inspectors
    ```typescript
@@ -71,7 +71,7 @@ While it might seem overly simple to use functions like `isString()` or `isNumbe
 
 The library strikes a balance between simplicity and power, allowing you to build complex inspection logic from simple building blocks while maintaining strong type safety.
 
-## Features
+## ✨ Features
 
 - 🔍 **Type Inspection**: Check if values match expected types at runtime
 - 📝 **TypeScript Integration**: Full TypeScript support with accurate type inference
@@ -79,7 +79,7 @@ The library strikes a balance between simplicity and power, allowing you to buil
 - 🍃 **Lightweight**: Zero dependencies, small bundle size
 - 🧩 **Flexible**: Works with primitive types, objects, arrays, and custom types
 
-## Installation
+## 📦 Installation
 
 ```bash
 # Using npm
@@ -92,9 +92,9 @@ yarn add @moon7/inspect
 pnpm add @moon7/inspect
 ```
 
-## Usage
+## 🚀 Usage
 
-### What is an Inspector?
+### 🔍 What is an Inspector?
 
 An `Inspector<T>` is a function that checks if a value conforms to a specific type `T` at runtime. Every inspector has the signature:
 
@@ -108,7 +108,7 @@ This uses TypeScript's [type predicates](https://www.typescriptlang.org/docs/han
 
 For example, after checking `if (isString(x))`, TypeScript knows that `x` is a `string` within that code block.
 
-### Basic Type Checking
+### 🧪 Basic Type Checking
 
 ```typescript
 import { isString, isNumber, isBoolean, isNull, isUndefined } from '@moon7/inspect';
@@ -126,7 +126,7 @@ isNull(null);         // true
 isUndefined(undefined); // true
 ```
 
-### Compound Type Checking
+### 🔌 Compound Type Checking
 
 ```typescript
 import { 
@@ -157,7 +157,7 @@ isStringOrNumber(42);      // true
 isStringOrNumber(true);    // false
 ```
 
-### Advanced Features
+### 🔬 Advanced Features
 
 ```typescript
 import { 
@@ -188,7 +188,7 @@ const isStringNumberMap = isMapOf(isString, isNumber);
 const isStringNumberRecord = isRecordOf(isString, isNumber);
 ```
 
-### Lazy Evaluation with `is()`
+### 🕰️ Lazy Evaluation with `is()`
 
 The `is()` function provides lazy evaluation of inspectors, which is crucial in several scenarios:
 
@@ -272,7 +272,7 @@ isOuroboros(ouroboros); // ❌ Maximum call stack size exceeded
 
 For validating data with circular references, consider implementing custom inspectors with reference tracking or depth limits.
 
-### Type Inference with Inspected
+### 🧬 Type Inference with Inspected
 
 The `Inspected<T>` utility type allows you to extract TypeScript types from your inspectors, eliminating the need to define types twice:
 
@@ -331,96 +331,96 @@ const isStringOrNumber = isAnyOf(isString, isNumber);
 type StringOrNumber = Inspected<typeof isStringOrNumber>; // string | number
 ```
 
-## API Reference
+## 📚 API Reference
 
-### Basic Inspectors
+| Export                          | Description                                                                            |
+| ------------------------------- | -------------------------------------------------------------------------------------- |
+| **🧰 Basic Inspectors**          |                                                                                        |
+| `isAny(x)`                      | Always returns true                                                                    |
+| `isNever(x)`                    | Always returns false                                                                   |
+| `isPrimitive(x)`                | Checks if x is null, undefined, number, string, or boolean                             |
+| `isUndefined(x)`                | Checks if x is undefined                                                               |
+| `isNull(x)`                     | Checks if x is null                                                                    |
+| `isNullish(x)`                  | Checks if x is null or undefined                                                       |
+| `isBoolean(x)`                  | Checks if x is a boolean                                                               |
+| `isNumber(x)`                   | Checks if x is a number                                                                |
+| `isInt(x)`                      | Checks if x is an integer                                                              |
+| `isString(x)`                   | Checks if x is a string                                                                |
+| `isArray(x)`                    | Checks if x is an array                                                                |
+| `isObject(x)`                   | Checks if x is an object                                                               |
+| `isFunction(x)`                 | Checks if x is a function                                                              |
+| `isClass(x)`                    | Checks if x is an ES6 class                                                            |
+| `isStruct(x)`                   | Checks if x is a plain object (not an instance of a class)                             |
+| `isRecord(x)`                   | Alias for isStruct                                                                     |
+| `isInstance(x)`                 | Checks if x is an instance of a class (but not a plain object)                         |
+| `isIterable(x)`                 | Checks if x is an Iterable                                                             |
+| `isIterator(x)`                 | Checks if x has the shape of an Iterator                                               |
+| `isBigInt(x)`                   | Checks if x is a bigint                                                                |
+| `isUInt32(x)`                   | Checks if x is an unsigned 32-bit integer                                              |
+| `isUInt8(x)`                    | Checks if x is an integer between 0 and 255 inclusive                                  |
+| `isRegExp(x)`                   | Checks if x is a RegExp object                                                         |
+| `isPlainObject(x)`              | Deprecated, use isStruct instead                                                       |
+| **🔄 Higher-Order Inspectors**   |                                                                                        |
+| `isOptional(isT)`               | Creates an inspector for `T \| undefined`                                              |
+| `isNullable(isT)`               | Creates an inspector for `T \| null`                                                   |
+| `isNot(isT)`                    | Negates an inspector                                                                   |
+| `isExact(value)`                | Checks if x is exactly a particular value                                              |
+| `isStringOf(value)`             | Typed version of isExact for string literals                                           |
+| `isNumberOf(value)`             | Typed version of isExact for number literals                                           |
+| `isBooleanOf(value)`            | Typed version of isExact for boolean literals                                          |
+| `isInstanceOf(Class)`           | Checks if x is an instance of a specific class                                         |
+| `isArrayOf(isT)`                | Checks if x is an array where every element matches isT                                |
+| `isIterableOf(isT)`             | Checks if x is an Iterable where every value matches isT                               |
+| `isSetOf(isT)`                  | Checks if x is a Set where every element matches isT                                   |
+| `isMapOf(isK, isV)`             | Checks if x is a Map with specific key and value types                                 |
+| `isRecordOf(isK, isV)`          | Checks if x is a Record with specific key and value types                              |
+| `isAnyOf(...inspectors)`        | Union type checking (x is A \| B \| C)                                                 |
+| `isAllOf(...inspectors)`        | Intersection type checking (x is A & B & C)                                            |
+| `isTupleOf(...inspectors)`      | Checks if x is an array with a specific sequence of types                              |
+| `isObjectOf(shape)`             | Checks if x has a certain object shape                                                 |
+| `is(lazy)`                      | Lazy inspector for circular references                                                 |
+| **🧩 Builtins Type Inspectors**  |                                                                                        |
+| `isDate(x)`                     | Checks if x is a Date object                                                           |
+| `isSet(x)`                      | Checks if x is a Set                                                                   |
+| `isMap(x)`                      | Checks if x is a Map                                                                   |
+| `isPromise(x)`                  | Checks if x is a Promise                                                               |
+| `isArrayLike(x)`                | Checks if x is array-like                                                              |
+| `isPromiseLike(x)`              | Checks if x is promise-like                                                            |
+| **🛠️ Extended Type Inspectors**  |                                                                                        |
+| `isNumberInRange(min, max)`     | Checks if a number is within a specific range (inclusive)                              |
+| `isNonEmptyArray(x)`            | Checks if x is a non-empty array                                                       |
+| `isNonEmptyArrayOf(isT)`        | Checks if x is a non-empty array where every element matches isT                       |
+| `isPartialOf(type)`             | Creates an inspector that checks if x contains a partial subset of the specified shape |
+| `isRefined(isT, ...predicates)` | Creates an inspector that refines another inspector with additional constraints        |
+| **📝 String Inspectors**         |                                                                                        |
+| `isStringMatching(pattern)`     | Checks if a string matches a specific RegExp pattern                                   |
+| `isISODateString(x)`            | Checks if string is a valid ISO 8601 date string                                       |
+| `isEmail(x)`                    | Checks if string is a valid email address                                              |
 
-- `isAny(x)`: Always returns true
-- `isNever(x)`: Always returns false
-- `isPrimitive(x)`: Checks if x is null, undefined, number, string, or boolean
-- `isUndefined(x)`: Checks if x is undefined
-- `isNull(x)`: Checks if x is null
-- `isNullish(x)`: Checks if x is null or undefined
-- `isBoolean(x)`: Checks if x is a boolean
-- `isNumber(x)`: Checks if x is a number
-- `isInt(x)`: Checks if x is an integer
-- `isString(x)`: Checks if x is a string
-- `isArray(x)`: Checks if x is an array
-- `isObject(x)`: Checks if x is an object
-- `isFunction(x)`: Checks if x is a function
-- `isClass(x)`: Checks if x is an ES6 class
-- `isStruct(x)`: Checks if x is a plain object (not an instance of a class)
-- `isRecord(x)`: Alias for isStruct
-- `isInstance(x)`: Checks if x is an instance of a class (but not a plain object)
-- `isIterable(x)`: Checks if x is an Iterable
-- `isIterator(x)`: Checks if x has the shape of an Iterator
-- `isBigInt(x)`: Checks if x is a bigint
-- `isUInt32(x)`: Checks if x is an unsigned 32-bit integer
-- `isUInt8(x)`: Checks if x is an integer between 0 and 255 inclusive
-- `isRegExp(x)`: Checks if x is a RegExp object
-- `isPlainObject(x)`: Deprecated, use isStruct instead
-
-### Higher-Order Inspectors
-
-- `isOptional(isT)`: Creates an inspector for `T | undefined`
-- `isNullable(isT)`: Creates an inspector for `T | null`
-- `isNot(isT)`: Negates an inspector
-- `isExact(value)`: Checks if x is exactly a particular value
-- `isStringOf(value)`: Typed version of isExact for string literals
-- `isNumberOf(value)`: Typed version of isExact for number literals
-- `isBooleanOf(value)`: Typed version of isExact for boolean literals
-- `isInstanceOf(Class)`: Checks if x is an instance of a specific class
-- `isArrayOf(isT)`: Checks if x is an array where every element matches isT
-- `isIterableOf(isT)`: Checks if x is an Iterable where every value matches isT
-- `isSetOf(isT)`: Checks if x is a Set where every element matches isT
-- `isMapOf(isK, isV)`: Checks if x is a Map with specific key and value types
-- `isRecordOf(isK, isV)`: Checks if x is a Record with specific key and value types
-- `isAnyOf(...inspectors)`: Union type checking (x is A | B | C)
-- `isAllOf(...inspectors)`: Intersection type checking (x is A & B & C)
-- `isTupleOf(...inspectors)`: Checks if x is an array with a specific sequence of types
-- `isObjectOf(shape)`: Checks if x has a certain object shape
-- `is(lazy)`: Lazy inspector for circular references
-
-### Builtins Type Inspectors
-
-- `isDate(x)`: Checks if x is a Date object
-- `isSet(x)`: Checks if x is a Set
-- `isMap(x)`: Checks if x is a Map
-- `isPromise(x)`: Checks if x is a Promise
-- `isArrayLike(x)`: Checks if x is array-like
-- `isPromiseLike(x)`: Checks if x is promise-like
-
-### Extended Type Inspectors
-
-- `isNumberInRange(min, max)`: Checks if a number is within a specific range (inclusive)
-- `isNonEmptyArray(x)`: Checks if x is a non-empty array
-- `isNonEmptyArrayOf(isT)`: Checks if x is a non-empty array where every element matches isT
-- `isPartialOf(type)`: Creates an inspector that checks if x contains a partial subset of the specified shape
-- `isRefined(isT, ...predicates)`: Creates an inspector that refines another inspector with additional constraints
-
-### String Inspectors
-
-- `isStringMatching(pattern)`: Checks if a string matches a specific RegExp pattern
-- `isISODateString(x)`: Checks if string is a valid ISO 8601 date string
-- `isEmail(x)`: Checks if string is a valid email address
-
-## When to Use This Library
+## 💡 When to Use This Library
 
 - Validating external API responses
 - Checking user input data
 - Runtime type checking when TypeScript's static type checking isn't enough
 - Defensive programming when working with dynamic data
 
-## Contributing
+## 🔗 Related Libraries
+
+| Library                                                     | Description                                                                     | npm                                                                                                             |
+| ----------------------------------------------------------- | ------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| [@moon7/async](https://github.com/moon7-io/moon7-async)     | Asynchronous utilities for managing promises, concurrent operations, and timing | [![npm version](https://img.shields.io/npm/v/@moon7/async.svg)](https://www.npmjs.com/package/@moon7/async)     |
+| [@moon7/inspect](https://github.com/moon7-io/moon7-inspect) | Runtime type checking with powerful, composable type inspectors                 | [![npm version](https://img.shields.io/npm/v/@moon7/inspect.svg)](https://www.npmjs.com/package/@moon7/inspect) |
+| [@moon7/result](https://github.com/moon7-io/moon7-result)   | Functional error handling with Result and Maybe types                           | [![npm version](https://img.shields.io/npm/v/@moon7/result.svg)](https://www.npmjs.com/package/@moon7/result)   |
+| [@moon7/signals](https://github.com/moon7-io/moon7-signals) | Reactive programming with Signals, Sources, and Streams                         | [![npm version](https://img.shields.io/npm/v/@moon7/signals.svg)](https://www.npmjs.com/package/@moon7/signals) |
+
+## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## Related Libraries
+## 📝 License
 
-- **@moon7/inspect**: Type inspection with `Inspector<T> = (x: any) => x is T`
-- **@moon7/validate**: Type validation with `Validator<T> = (x: T) => void`
-- **@moon7/async**: Asynchronous utilities for JavaScript and TypeScript
+This project is released under the MIT License. See the [LICENSE](https://github.com/moon7-io/moon7-inspect/blob/main/LICENSE) file for details.
 
-## License
+## 🌟 Acknowledgements
 
-MIT © Munir Hussin
+Created and maintained by [Munir Hussin](https://github.com/profound7).
