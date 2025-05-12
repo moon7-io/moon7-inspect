@@ -1,5 +1,4 @@
 # 🌙 @moon7/inspect
-# 🌙 @moon7/inspect
 
 [![npm version](https://img.shields.io/npm/v/@moon7/inspect.svg)](https://www.npmjs.com/package/@moon7/inspect)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -7,11 +6,9 @@
 A lightweight, type-safe runtime type checking library for TypeScript and JavaScript.
 
 ## 🎯 Purpose
-## 🎯 Purpose
 
 While it might seem overly simple to use functions like `isString()` or `isNumber()` when you could directly write `typeof x === "string"`, the real power of this library lies in its composability and how it integrates with TypeScript's type system.
 
-### 🤔 Why Not Just Use typeof?
 ### 🤔 Why Not Just Use typeof?
 
 1. **Composability**: The inspector functions can be combined to create complex type inspectors
@@ -75,7 +72,6 @@ While it might seem overly simple to use functions like `isString()` or `isNumbe
 The library strikes a balance between simplicity and power, allowing you to build complex inspection logic from simple building blocks while maintaining strong type safety.
 
 ## ✨ Features
-## ✨ Features
 
 - 🔍 **Type Inspection**: Check if values match expected types at runtime
 - 📝 **TypeScript Integration**: Full TypeScript support with accurate type inference
@@ -83,7 +79,6 @@ The library strikes a balance between simplicity and power, allowing you to buil
 - 🍃 **Lightweight**: Zero dependencies, small bundle size
 - 🧩 **Flexible**: Works with primitive types, objects, arrays, and custom types
 
-## 📦 Installation
 ## 📦 Installation
 
 ```bash
@@ -98,9 +93,7 @@ pnpm add @moon7/inspect
 ```
 
 ## 🚀 Usage
-## 🚀 Usage
 
-### 🔍 What is an Inspector?
 ### 🔍 What is an Inspector?
 
 An `Inspector<T>` is a function that checks if a value conforms to a specific type `T` at runtime. Every inspector has the signature:
@@ -115,7 +108,6 @@ This uses TypeScript's [type predicates](https://www.typescriptlang.org/docs/han
 
 For example, after checking `if (isString(x))`, TypeScript knows that `x` is a `string` within that code block.
 
-### 🧪 Basic Type Checking
 ### 🧪 Basic Type Checking
 
 ```typescript
@@ -134,7 +126,6 @@ isNull(null);         // true
 isUndefined(undefined); // true
 ```
 
-### 🔌 Compound Type Checking
 ### 🔌 Compound Type Checking
 
 ```typescript
@@ -167,7 +158,6 @@ isStringOrNumber(true);    // false
 ```
 
 ### 🔬 Advanced Features
-### 🔬 Advanced Features
 
 ```typescript
 import { 
@@ -198,7 +188,6 @@ const isStringNumberMap = isMapOf(isString, isNumber);
 const isStringNumberRecord = isRecordOf(isString, isNumber);
 ```
 
-### 🕰️ Lazy Evaluation with `is()`
 ### 🕰️ Lazy Evaluation with `is()`
 
 The `is()` function provides lazy evaluation of inspectors, which is crucial in several scenarios:
@@ -283,7 +272,6 @@ isOuroboros(ouroboros); // ❌ Maximum call stack size exceeded
 
 For validating data with circular references, consider implementing custom inspectors with reference tracking or depth limits.
 
-### 🧬 Type Inference with Inspected
 ### 🧬 Type Inference with Inspected
 
 The `Inspected<T>` utility type allows you to extract TypeScript types from your inspectors, eliminating the need to define types twice:
@@ -475,7 +463,6 @@ type StringOrNumber = Inspected<typeof isStringOrNumber>; // string | number
 | `isEmail(x)`                    | Checks if string is a valid email address                                              |
 
 ## 💡 When to Use This Library
-## 💡 When to Use This Library
 
 - Validating external API responses
 - Checking user input data
@@ -492,27 +479,13 @@ type StringOrNumber = Inspected<typeof isStringOrNumber>; // string | number
 | [@moon7/signals](https://github.com/moon7-io/moon7-signals) | Reactive programming with Signals, Sources, and Streams                         | [![npm version](https://img.shields.io/npm/v/@moon7/signals.svg)](https://www.npmjs.com/package/@moon7/signals) |
 
 ## 🤝 Contributing
-## 🔗 Related Libraries
-
-| Library                                                     | Description                                                                     | npm                                                                                                             |
-| ----------------------------------------------------------- | ------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| [@moon7/async](https://github.com/moon7-io/moon7-async)     | Asynchronous utilities for managing promises, concurrent operations, and timing | [![npm version](https://img.shields.io/npm/v/@moon7/async.svg)](https://www.npmjs.com/package/@moon7/async)     |
-| [@moon7/inspect](https://github.com/moon7-io/moon7-inspect) | Runtime type checking with powerful, composable type inspectors                 | [![npm version](https://img.shields.io/npm/v/@moon7/inspect.svg)](https://www.npmjs.com/package/@moon7/inspect) |
-| [@moon7/result](https://github.com/moon7-io/moon7-result)   | Functional error handling with Result and Maybe types                           | [![npm version](https://img.shields.io/npm/v/@moon7/result.svg)](https://www.npmjs.com/package/@moon7/result)   |
-| [@moon7/signals](https://github.com/moon7-io/moon7-signals) | Reactive programming with Signals, Sources, and Streams                         | [![npm version](https://img.shields.io/npm/v/@moon7/signals.svg)](https://www.npmjs.com/package/@moon7/signals) |
-
-## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 📝 License
 
 This project is released under the MIT License. See the [LICENSE](https://github.com/moon7-io/moon7-inspect/blob/main/LICENSE) file for details.
-## 📝 License
-
-This project is released under the MIT License. See the [LICENSE](https://github.com/moon7-io/moon7-inspect/blob/main/LICENSE) file for details.
 
 ## 🌟 Acknowledgements
 
-Created and maintained by [Munir Hussin](https://github.com/profound7).
 Created and maintained by [Munir Hussin](https://github.com/profound7).
