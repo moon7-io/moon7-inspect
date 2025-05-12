@@ -333,7 +333,7 @@ type StringOrNumber = Inspected<typeof isStringOrNumber>; // string | number
 
 ## 📚 API Reference
 
-| Export                          | Description                                                                            |
+| API                             | Description                                                                            |
 | ------------------------------- | -------------------------------------------------------------------------------------- |
 | **🧰 Basic Inspectors**          |                                                                                        |
 | `isAny(x)`                      | Always returns true                                                                    |
